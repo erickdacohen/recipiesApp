@@ -59,3 +59,8 @@ body {
         padding: 1rem;
     }
 }
+
+/* Main body area */
+#main-display-container {
+    margin-top: 10rem;
+}
