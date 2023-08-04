@@ -64,3 +64,21 @@ body {
 #main-display-container {
     margin-top: 10rem;
 }
+
+.display-section-heading {
+    padding: 2rem;
+    font-weight: 400;
+}
+
+
+/* Add new recipe form */
+.new-recipe-form {
+    height: 2rem;
+    width: 50%;
+}
+
+/* Search form */
+.search-form-text-input {
+    height: 2rem;
+    width: 60%;
+}
