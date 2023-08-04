@@ -28,31 +28,43 @@ const buildSearchForm = () => {
 	mainDisplay.appendChild(form)
 }
 
-const addNewRecipe = () => {
+// Build form to add recipe
+const buildRecipeForm = () => {
 	const newRecipieForm = document.createElement('form')
 	const recipeNameInput = document.createElement('input')
+	const recipeURLInput = document.createElement('input')
+	const addButton = document.createElement('button')
 
+	newRecipieForm.classList.add('new-recipe-form')
 	recipeNameInput.classList.add('new-recipe-form-input')
-	recipeNameInput
+	recipeURLInput.classList.add('new-recipe-form-input')
+	addButton.classList.add('new-recipe-add-btn')
+
+	addButton.textContent = 'Add Recipe'
+	recipeNameInput.placeholder = 'Recipe Name'
+	recipeURLInput.placeholder = 'URL to recipe'
 
 	newRecipieForm.appendChild(recipeNameInput)
-
+	newRecipieForm.appendChild(recipeURLInput)
 	mainDisplay.appendChild(newRecipieForm)
+	mainDisplay.appendChild(addButton)
 }
 
 const generateRandomRecipe = () => {}
 
 // Display each option
+const addHeading = (headingText) => {
+	const heading = document.createElement('h1')
+	heading.classList.add('display-section-heading')
+	heading.innerText = headingText
+	mainDisplay.appendChild(heading)
+}
+
 const displaySearch = () => {
 	if (mainDisplay.children.length > 0) {
 		mainDisplay.innerHTML = ''
 	}
-
-	const heading = document.createElement('h1')
-	heading.classList.add('display-section-heading')
-	heading.innerText = 'Search'
-	mainDisplay.appendChild(heading)
-
+	addHeading('Search')
 	buildSearchForm()
 	// TODO add search functionality
 }
@@ -62,11 +74,7 @@ const displayGenerateRandom = () => {
 		mainDisplay.innerHTML = ''
 	}
 
-	const heading = document.createElement('h1')
-	heading.classList.add('display-section-heading')
-	heading.innerText = 'Get Random recipe'
-	mainDisplay.appendChild(heading)
-
+	addHeading('Get Random Recipe')
 	generateRandomRecipe()
 }
 
@@ -74,14 +82,6 @@ const displayAdd = () => {
 	if (mainDisplay.children.length > 0) {
 		mainDisplay.innerHTML = ''
 	}
-
-	const heading = document.createElement('h1')
-	heading.classList.add('display-section-heading')
-	heading.innerText = 'Add new recipe'
-
-	mainDisplay.appendChild(heading)
-	addNewRecipe()
+	addHeading('Add New Recipe')
+	buildRecipeForm()
 }
-
-// Always start with Search
-// displaySearch()
