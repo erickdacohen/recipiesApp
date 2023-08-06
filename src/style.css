@@ -10,6 +10,7 @@
     --no-recipes-card-color: #fff;
     --recipes-card-background-color: #888;
     --recipes-card-text-color: #fff;
+    --delete-recipe-btn-press-color: #cf3838e7;
 }
 
 * {
@@ -140,5 +141,21 @@ body {
     padding: 1rem;
     width: 10rem;
     margin: 2rem;
+    position: relative;
+}
+
+.recipe-card-delete-btn~a {
     text-decoration: none;
+    color: var(--recipes-card-text-color);
+}
+
+.recipe-card-delete-btn {
+    position: absolute;
+    top: 15%;
+    left: 85%;
+}
+
+.recipe-card-delete-btn:hover {
+    color: var(--delete-recipe-btn-press-color);
+    cursor: pointer;
 }
