@@ -40,6 +40,9 @@ const buildRecipeForm = () => {
 	recipeURLInput.classList.add('new-recipe-form-input')
 	addButton.classList.add('new-recipe-add-btn')
 
+	recipeNameInput.setAttribute('id', 'name-input')
+	recipeURLInput.setAttribute('id', 'url-input')
+
 	addButton.textContent = 'Add Recipe'
 	recipeNameInput.placeholder = 'Recipe Name'
 	recipeURLInput.placeholder = 'URL to recipe'
@@ -48,8 +51,39 @@ const buildRecipeForm = () => {
 	newRecipieForm.appendChild(recipeURLInput)
 	mainDisplay.appendChild(newRecipieForm)
 	mainDisplay.appendChild(addButton)
+
+	addButton.addEventListener('click', addNewRecipe)
 }
 
+// Handle local storage
+const addNewRecipe = () => {
+	// grab values from inputs
+	const name = document.querySelector('#name-input').value
+	const url = document.querySelector('#url-input').value
+	const id = Date.now()
+	const recipe = new Recipe(id, name, url)
+
+	// Save recipe to local storage
+	addRecipeToLocalStorage(recipe)
+
+	alert('Recipe added!')
+	// clear the fields
+	document.querySelector('#name-input').value = ''
+	document.querySelector('#url-input').value = ''
+	return recipe
+}
+
+const readRecipesFromLocalStorage = () => {
+	if (localStorage.getItem('recipes') === null) {
+		return
+	} else {
+		return localStorage.getItem('recipes')
+	}
+}
+
+const addRecipeToLocalStorage = (recipe) => {}
+
+// generate random recipe
 const generateRandomRecipe = () => {}
 
 // Display each option
