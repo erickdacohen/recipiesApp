@@ -1,4 +1,5 @@
 import Recipe from '../components/Recipe.js'
+import makeTitleCase from './makeTitleCase.js'
 
 const readRecipesFromLocalStorage = () => {
 	if (localStorage.getItem('recipes') === null) {
@@ -10,7 +11,7 @@ const readRecipesFromLocalStorage = () => {
 
 const addNewRecipeToLocalStorage = () => {
 	// grab values from inputs
-	const name = document.querySelector('#name-input').value
+	const name = makeTitleCase(document.querySelector('#name-input').value)
 	const url = document.querySelector('#url-input').value
 	const id = Date.now()
 	const recipe = new Recipe(id, name, url)

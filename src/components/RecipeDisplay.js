@@ -2,6 +2,8 @@ import { readRecipesFromLocalStorage } from '../utils/localStorage.js'
 
 const displayRecipes = () => {
 	const mainDisplay = document.getElementById('main-display-container')
+	const recipeCardContainer = document.createElement('div')
+	recipeCardContainer.classList.add('recipe-card-container')
 
 	const recipes = readRecipesFromLocalStorage()
 	if (!recipes) {
@@ -15,10 +17,22 @@ const displayRecipes = () => {
 		noRecipesDisplay.appendChild(noRecipesDisplayH2)
 		mainDisplay.appendChild(noRecipesDisplay)
 	} else {
-		// CONTINUE HERE
-		recipes.forEach((recipe) => {
+		JSON.parse(recipes).forEach((recipe) => {
 			const { name, url } = recipe
-			const recipeCard = document.createElement()
+
+			const recipeCard = document.createElement('a')
+			const recipeName = document.createElement('h2')
+
+			recipeCard.setAttribute('href', url)
+			recipeCard.setAttribute('target', '_blank')
+			recipeCard.classList.add('recipe-card')
+
+			recipeName.textContent = name
+
+			recipeCard.appendChild(recipeName)
+
+			recipeCardContainer.appendChild(recipeCard)
+			mainDisplay.appendChild(recipeCardContainer)
 		})
 	}
 }
