@@ -1,5 +1,7 @@
 import Recipe from './components/Recipe.js'
-
+import buildSearchForm from './components/SearchForm.js'
+import buildRecipeForm from './components/RecipeForm.js'
+import displayRecipes from './components/RecipeDisplay.js'
 // Get top nav buttons
 const searchRecipiesButtons = document.querySelectorAll('.header-list-item')
 searchRecipiesButtons.forEach((button) => {
@@ -17,78 +19,6 @@ searchRecipiesButtons.forEach((button) => {
 
 // get main display area
 const mainDisplay = document.getElementById('main-display-container')
-
-// build search and search functionality
-const buildSearchForm = () => {
-	const form = document.createElement('form')
-	const recipeURLInput = document.createElement('input')
-	recipeURLInput.classList.add('search-form-text-input')
-
-	form.appendChild(recipeURLInput)
-	mainDisplay.appendChild(form)
-}
-
-// Build form to add recipe
-const buildRecipeForm = () => {
-	const newRecipieForm = document.createElement('form')
-	const recipeNameInput = document.createElement('input')
-	const recipeURLInput = document.createElement('input')
-	const addButton = document.createElement('button')
-
-	newRecipieForm.classList.add('new-recipe-form')
-	recipeNameInput.classList.add('new-recipe-form-input')
-	recipeURLInput.classList.add('new-recipe-form-input')
-	addButton.classList.add('new-recipe-add-btn')
-
-	recipeNameInput.setAttribute('id', 'name-input')
-	recipeURLInput.setAttribute('id', 'url-input')
-
-	addButton.textContent = 'Add Recipe'
-	recipeNameInput.placeholder = 'Recipe Name'
-	recipeURLInput.placeholder = 'URL to recipe'
-
-	newRecipieForm.appendChild(recipeNameInput)
-	newRecipieForm.appendChild(recipeURLInput)
-	mainDisplay.appendChild(newRecipieForm)
-	mainDisplay.appendChild(addButton)
-
-	addButton.addEventListener('click', addNewRecipeToLocalStorage)
-}
-
-// Handle local storage
-
-const readRecipesFromLocalStorage = () => {
-	if (localStorage.getItem('recipes') === null) {
-		return
-	} else {
-		return localStorage.getItem('recipes')
-	}
-}
-
-const addNewRecipeToLocalStorage = () => {
-	// grab values from inputs
-	const name = document.querySelector('#name-input').value
-	const url = document.querySelector('#url-input').value
-	const id = Date.now()
-	const recipe = new Recipe(id, name, url)
-
-	let recipesLocalStorage = readRecipesFromLocalStorage()
-	if (recipesLocalStorage === undefined) {
-		recipesLocalStorage = []
-		recipesLocalStorage.push(recipe)
-		localStorage.setItem('recipes', JSON.stringify(recipesLocalStorage))
-	} else {
-		recipesLocalStorage = JSON.parse(recipesLocalStorage)
-		recipesLocalStorage.push(recipe)
-		localStorage.setItem('recipes', JSON.stringify(recipesLocalStorage))
-	}
-
-	alert('Recipe added!')
-	// clear the fields
-	document.querySelector('#name-input').value = ''
-	document.querySelector('#url-input').value = ''
-	return recipe
-}
 
 // generate random recipe
 const generateRandomRecipe = () => {}
@@ -108,6 +38,8 @@ const displaySearch = () => {
 	addHeading('Search')
 	buildSearchForm()
 	// TODO add search functionality
+
+	displayRecipes()
 }
 
 const displayGenerateRandom = () => {
@@ -126,3 +58,5 @@ const displayAdd = () => {
 	addHeading('Add New Recipe')
 	buildRecipeForm()
 }
+
+document.addEventListener('DOMContentLoaded', displaySearch)

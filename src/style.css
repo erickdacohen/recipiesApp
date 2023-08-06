@@ -6,6 +6,8 @@
     --add-recipe-button-background: #888;
     --add-recipe-button-background-hover: #fff;
     --add-recipe-button-text-color: #fff;
+    --no-recipes-card-background-color: #888;
+    --no-recipes-card-color: #fff;
 }
 
 * {
@@ -65,7 +67,7 @@ body {
 
 /* Main body area */
 #main-display-container {
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 
 .display-section-heading {
@@ -99,4 +101,13 @@ body {
 .search-form-text-input {
     height: 2rem;
     width: 60%;
+}
+
+/* Recipe Display Cards */
+.no-recipes-to-display {
+    margin: 4rem 9rem;
+    padding: 3rem;
+    border-radius: 20px;
+    color: var(--no-recipes-card-color);
+    background-color: var(--no-recipes-card-background-color);
 }
