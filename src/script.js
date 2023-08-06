@@ -52,26 +52,10 @@ const buildRecipeForm = () => {
 	mainDisplay.appendChild(newRecipieForm)
 	mainDisplay.appendChild(addButton)
 
-	addButton.addEventListener('click', addNewRecipe)
+	addButton.addEventListener('click', addNewRecipeToLocalStorage)
 }
 
 // Handle local storage
-const addNewRecipe = () => {
-	// grab values from inputs
-	const name = document.querySelector('#name-input').value
-	const url = document.querySelector('#url-input').value
-	const id = Date.now()
-	const recipe = new Recipe(id, name, url)
-
-	// Save recipe to local storage
-	addRecipeToLocalStorage(recipe)
-
-	alert('Recipe added!')
-	// clear the fields
-	document.querySelector('#name-input').value = ''
-	document.querySelector('#url-input').value = ''
-	return recipe
-}
 
 const readRecipesFromLocalStorage = () => {
 	if (localStorage.getItem('recipes') === null) {
@@ -81,7 +65,30 @@ const readRecipesFromLocalStorage = () => {
 	}
 }
 
-const addRecipeToLocalStorage = (recipe) => {}
+const addNewRecipeToLocalStorage = () => {
+	// grab values from inputs
+	const name = document.querySelector('#name-input').value
+	const url = document.querySelector('#url-input').value
+	const id = Date.now()
+	const recipe = new Recipe(id, name, url)
+
+	let recipesLocalStorage = readRecipesFromLocalStorage()
+	if (recipesLocalStorage === undefined) {
+		recipesLocalStorage = []
+		recipesLocalStorage.push(recipe)
+		localStorage.setItem('recipes', JSON.stringify(recipesLocalStorage))
+	} else {
+		recipesLocalStorage = JSON.parse(recipesLocalStorage)
+		recipesLocalStorage.push(recipe)
+		localStorage.setItem('recipes', JSON.stringify(recipesLocalStorage))
+	}
+
+	alert('Recipe added!')
+	// clear the fields
+	document.querySelector('#name-input').value = ''
+	document.querySelector('#url-input').value = ''
+	return recipe
+}
 
 // generate random recipe
 const generateRandomRecipe = () => {}
