@@ -78,4 +78,4 @@ const deleteRecipeFromDOM = (id) => {
 	if (recipeCardContainer.childNodes.length === 0) displayModal()
 }
 
-export { displayRecipes, makeRecipeCards }
+export { displayRecipes, makeRecipeCards, displayModal }

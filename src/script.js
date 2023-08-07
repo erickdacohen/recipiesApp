@@ -4,7 +4,7 @@ import { displayRecipes } from './components/RecipeDisplay.js'
 import generateRandomRecipe from './utils/generateRandomRecipe.js'
 import addHeading from './utils/addHeading.js'
 import createRandomRecipeCard from './components/RandomRecipeCard.js'
-import { readRecipesFromLocalStorage } from './utils/localStorage.js'
+import { displayModal } from './components/RecipeDisplay.js'
 
 // Get top nav buttons
 const searchRecipiesButtons = document.querySelectorAll('.header-list-item')
@@ -39,12 +39,16 @@ const displayGenerateRandom = () => {
 	}
 
 	addHeading('Get Random Recipe')
+
 	const recipeObjToDisplay = generateRandomRecipe()
+	if (!recipeObjToDisplay) {
+		displayModal()
+	} else {
+		const { name, url, id } = recipeObjToDisplay
+		const recipeCardContainer = createRandomRecipeCard(name, url, id)
 
-	const { name, url, id } = recipeObjToDisplay
-	const recipeCardContainer = createRandomRecipeCard(name, url, id)
-
-	mainDisplay.appendChild(recipeCardContainer)
+		mainDisplay.appendChild(recipeCardContainer)
+	}
 }
 
 const displayAdd = () => {
