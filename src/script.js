@@ -1,6 +1,7 @@
 import buildSearchForm from './components/SearchForm.js'
 import buildRecipeForm from './components/RecipeForm.js'
 import displayRecipes from './components/RecipeDisplay.js'
+import { readRecipesFromLocalStorage } from './utils/localStorage.js'
 
 // Get top nav buttons
 const searchRecipiesButtons = document.querySelectorAll('.header-list-item')
@@ -21,7 +22,13 @@ searchRecipiesButtons.forEach((button) => {
 const mainDisplay = document.getElementById('main-display-container')
 
 // generate random recipe
-const generateRandomRecipe = () => {}
+const generateRandomRecipe = () => {
+	const recipes = readRecipesFromLocalStorage()
+	const randomIndex = Math.floor(Math.random() * recipes.length)
+
+	const recipeToDisplay = recipes[randomIndex]
+	return recipeToDisplay
+}
 
 // Display each option
 const addHeading = (headingText) => {
@@ -48,7 +55,31 @@ const displayGenerateRandom = () => {
 	}
 
 	addHeading('Get Random Recipe')
-	generateRandomRecipe()
+	const recipeObjToDisplay = generateRandomRecipe()
+
+	const { name, url, id } = recipeObjToDisplay
+
+	const recipeCard = document.createElement('div')
+	const recipeLink = document.createElement('a')
+	const recipeName = document.createElement('h2')
+
+	recipeCard.classList.add('recipe-card')
+	recipeLink.classList.add('recipe-card-link')
+
+	recipeLink.setAttribute('href', url)
+	recipeLink.setAttribute('target', '_blank')
+	recipeCard.setAttribute('id', id)
+
+	recipeName.textContent = name
+
+	recipeLink.appendChild(recipeName)
+	recipeCard.appendChild(recipeLink)
+
+	const recipeCardContainer = document.createElement('div')
+	recipeCardContainer.classList.add('recipe-card-container')
+
+	recipeCardContainer.appendChild(recipeCard)
+	mainDisplay.appendChild(recipeCardContainer)
 }
 
 const displayAdd = () => {

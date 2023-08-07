@@ -140,11 +140,13 @@ body {
     align-items: center;
     padding: 1rem;
     width: 10rem;
+    height: 5rem;
     margin: 2rem;
     position: relative;
 }
 
-.recipe-card-delete-btn~a {
+
+.recipe-card-link {
     text-decoration: none;
     color: var(--recipes-card-text-color);
 }
