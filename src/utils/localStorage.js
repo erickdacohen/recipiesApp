@@ -1,12 +1,11 @@
 import Recipe from '../components/Recipe.js'
 import makeTitleCase from './makeTitleCase.js'
-import displayRecipes from '../components/RecipeDisplay.js'
 
 const readRecipesFromLocalStorage = () => {
 	if (localStorage.getItem('recipes') === null) {
 		return
 	} else {
-		return localStorage.getItem('recipes')
+		return JSON.parse(localStorage.getItem('recipes'))
 	}
 }
 
@@ -23,7 +22,6 @@ const addNewRecipeToLocalStorage = () => {
 		recipesLocalStorage.push(recipe)
 		localStorage.setItem('recipes', JSON.stringify(recipesLocalStorage))
 	} else {
-		recipesLocalStorage = JSON.parse(recipesLocalStorage)
 		recipesLocalStorage.push(recipe)
 		localStorage.setItem('recipes', JSON.stringify(recipesLocalStorage))
 	}
@@ -36,7 +34,7 @@ const addNewRecipeToLocalStorage = () => {
 }
 
 const deleteRecipeFromLocalStorage = (recipeId) => {
-	const recipesLocalStorage = JSON.parse(readRecipesFromLocalStorage())
+	const recipesLocalStorage = readRecipesFromLocalStorage()
 	const filteredItems = recipesLocalStorage.filter(
 		(recipe) => recipe.id !== Number(recipeId)
 	)

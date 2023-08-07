@@ -1,7 +1,7 @@
-import Recipe from './components/Recipe.js'
 import buildSearchForm from './components/SearchForm.js'
 import buildRecipeForm from './components/RecipeForm.js'
 import displayRecipes from './components/RecipeDisplay.js'
+
 // Get top nav buttons
 const searchRecipiesButtons = document.querySelectorAll('.header-list-item')
 searchRecipiesButtons.forEach((button) => {

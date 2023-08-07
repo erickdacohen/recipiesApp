@@ -3,6 +3,7 @@ import { deleteRecipeFromLocalStorage } from '../utils/localStorage.js'
 
 const mainDisplay = document.getElementById('main-display-container')
 const recipeCardContainer = document.createElement('div')
+recipeCardContainer.classList.add('recipe-card-container')
 
 const displayModal = () => {
 	const noRecipesDisplay = document.createElement('section')
@@ -17,14 +18,15 @@ const displayModal = () => {
 }
 
 const displayRecipes = () => {
-	recipeCardContainer.classList.add('recipe-card-container')
-
 	const recipes = readRecipesFromLocalStorage()
 
-	if (!recipes || JSON.parse(recipes).length === 0) {
+	// clear the recipeCardContainer
+	recipeCardContainer.innerHTML = ''
+
+	if (!recipes || recipes.length === 0) {
 		displayModal()
 	} else {
-		JSON.parse(recipes).forEach((recipe) => {
+		recipes.forEach((recipe) => {
 			const { name, url, id } = recipe
 
 			const recipeCard = document.createElement('div')
@@ -60,7 +62,6 @@ const displayRecipes = () => {
 
 const deleteRecipeFromDOM = (id) => {
 	const childToRemove = document.getElementById(id)
-	console.log(childToRemove)
 	recipeCardContainer.removeChild(childToRemove)
 
 	if (recipeCardContainer.childNodes.length === 0) displayModal()
