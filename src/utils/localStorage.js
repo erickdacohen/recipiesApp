@@ -9,6 +9,8 @@ const readRecipesFromLocalStorage = () => {
 	}
 }
 
+let recipes = readRecipesFromLocalStorage()
+
 const addNewRecipeToLocalStorage = () => {
 	// grab values from inputs
 	const name = makeTitleCase(document.querySelector('#name-input').value)
@@ -30,7 +32,9 @@ const addNewRecipeToLocalStorage = () => {
 	// clear the fields
 	document.querySelector('#name-input').value = ''
 	document.querySelector('#url-input').value = ''
-	return recipe
+	recipes = readRecipesFromLocalStorage()
+
+	return
 }
 
 const deleteRecipeFromLocalStorage = (recipeId) => {
@@ -40,10 +44,12 @@ const deleteRecipeFromLocalStorage = (recipeId) => {
 	)
 
 	localStorage.setItem('recipes', JSON.stringify(filteredItems))
+	recipes = readRecipesFromLocalStorage()
 	return
 }
 
 export {
+	recipes,
 	readRecipesFromLocalStorage,
 	addNewRecipeToLocalStorage,
 	deleteRecipeFromLocalStorage,
